@@ -55,3 +55,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# env folder
+app_env/
+
+# db file
+db.sqlite3
