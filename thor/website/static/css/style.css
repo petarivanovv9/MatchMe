@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Architects+Daughter|Pacifico');
+@import './normalize.css';
+@import './section.css';
+@import './home.css';
+@import './animate.css';
+
+html, body, .dark {
+	color: #222;
+}
+
+.logo {
+	font-family: 'Indie Flower', cursive;
+	margin: 0.3em 0;
+	text-align: center;
+	color: #fff;
+}
+
+.logo h1 {
+	font-size: 3.5em;
+}
+
+.logo, .logo * {
+	transition: color 200ms;
+}
+
+.logo:hover {
+	text-decoration: none;
+	color: #222;
+}
+
+.logo:hover .dark {
+	color: #fff;
+}
+
+#footer {
+	min-height: 50vh;
+	padding-top: 55px;
+	background-color: #222;
+	color: #fff;
+}
+
+#footer ul {
+	list-style: none;
+	padding: 0;
+}
+
+#footer .logo:hover {
+	color: #fff;
+}
+
+#footer > div {
+	text-align: center;
+}
