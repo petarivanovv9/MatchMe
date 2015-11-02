@@ -13,7 +13,7 @@ def index(request):
 
 
 def user_login(request):
-	pass
+	return render(request, "login.html")
 
 
 def user_logout(request):
@@ -25,4 +25,4 @@ def _validate_register(username, email, password, password2):
 
 
 def user_register(request):
-	pass	
+	return render(request, "register.html")	
