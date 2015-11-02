@@ -49,26 +49,26 @@ def _validate_register(username, email, password, password2):
 
 
 def user_register(request):
-	if request.user.is_authenticated():
-		return redirect("index")
-	else:
-		if request.method == "POST":
-			username = request.POST.get("username")
-			email = request.POST.get("email")
-			password_1 = request.POST.get("password")
-			password_2 = request.POST.get("password2")
-			
-			if not _validate_register(username, email, password, password2):
+    if request.user.is_authenticated():
+        return redirect("index")
+    else:
+        if request.method == "POST":
+            username = request.POST.get("username")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            password_2 = request.POST.get("password2")
+
+            if not _validate_register(username, email, password, password_2):
                 return redirect("register")
 
             user = User.objects.create_user(username, email, password)
 
             if user is not None:
-            	user = authenticate(username=username, password=password)
-            	login(request, user)
-            	return redirect("index")
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect("index")
             else:
-            	return render(request, "register.html")
+                return render(request, "register.html")
 
-		else:
-			return render(request, "register.html")
+        else:
+            return render(request, "register.html")
