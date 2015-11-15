@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 from datetime import datetime
 
 # Create your models here.
@@ -36,3 +38,11 @@ class Event(models.Model):
 
     def get_absolute_url(self):
         return "/event/%i" % self.pk
+
+
+class EventUser(models.Model):
+    event = models.ForeignKey(Event)
+    user = models.ForeignKey(User)
+
+    def __str__(self):
+        return "{} - {}".format(self.event, self.user)

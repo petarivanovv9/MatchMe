@@ -5,13 +5,17 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.decorators import login_required
 
-from .models import Event
+from .models import Event, EventUser
 
 # Create your views here.
 
 
 def index(request):
     events = Event.objects.all()
+    user_id = request.user.id
+    user_events = []
+    for elem in EventUser.objects.filter(user_id=user_id):
+        user_events.append(Event.objects.get(id=elem.id))
 
     return render(request, "index.html", locals())
 
