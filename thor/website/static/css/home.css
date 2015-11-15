@@ -1,0 +1,90 @@
+#hero {
+	background-color: #3498db; /* #f08136; #f39c12 */
+	color: #fff;
+}
+
+#hero .user-nav {
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 200;
+	margin-top: 0.6em;
+}
+
+#hero .user-nav a{
+	padding: 0 0.2em;
+	color: #fff;
+}
+#hero .user-nav a.dark {
+	color: #222;
+}
+
+#hero .slogan {
+	text-align: center;
+	font-size: 2em;
+	color: #222;
+}
+
+#hero .slogan h1 {
+	font-size: 2em;
+	margin-bottom: 0.3em;
+}
+
+#hero .slogan h2 {
+	font-size: 1.5em;
+}
+
+#story div {
+	text-align: center;
+}
+
+#team .row div {
+	margin-bottom: 0.4em;
+}
+
+.team-members {
+	text-align: center;
+}
+
+.team-members h4 {
+	margin-bottom: 0;
+}
+
+#features ul.row {
+	list-style: none;
+	overflow-x: hidden; 
+}
+
+#features ul.row li img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 128px;
+	height: 128px;
+}
+
+#features ul.row li {
+	position: relative;
+	padding-left: 148px;
+	padding-top: 23px;
+	font-size: 1.6em;
+	line-height: 1.7em;
+	min-height: 128px;
+	margin-bottom: 24px;
+}
+
+/* media */
+
+@media (min-width: 768px) { 
+	#hero .slogan h1 {
+	font-size: 3em;
+	margin-bottom: 0.3em;
+	}
+
+	#hero .slogan h2 {
+		font-size: 2.5em;
+	}
+
+	h2.section-title {
+		font-size: 11em;
+	}
+}
