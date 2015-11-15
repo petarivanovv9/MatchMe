@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 
+from django.shortcuts import HttpResponse
+
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
@@ -15,7 +17,7 @@ def index(request):
     user_id = request.user.id
     user_events = []
     for elem in EventUser.objects.filter(user_id=user_id):
-        user_events.append(Event.objects.get(id=elem.id))
+        user_events.append(Event.objects.get(id=elem.event.id))
 
     return render(request, "index.html", locals())
 
@@ -86,4 +88,16 @@ def user_register(request):
 def view_event(request, event_id):
     current_event = Event.objects.get(pk=event_id)
 
+    bam = EventUser.objects.filter(event_id=event_id, user_id=request.user.id)
+    has_attended = True
+    if not bam:
+        has_attended = False
+
     return render(request, "event.html", locals())
+
+
+@login_required
+def attend_event(request, event_id):
+    EventUser(event_id=event_id, user_id=request.user.id).save()
+
+    return redirect("index")

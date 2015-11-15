@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from .views import index, user_register, user_login, user_logout
-from .views import view_event
+from .views import view_event, attend_event
 
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^logout/$', user_logout, name="logout"),
 
     url(r'^event/(?P<event_id>\d+)/$', view_event, name="event"),
+    url(r'^event/attend/(?P<event_id>\d+)/$', attend_event, name="attend"),
 ]
