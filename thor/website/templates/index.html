@@ -26,7 +26,14 @@
 		</div>
 
 		<div class="col-md-4 col-md-offset-5 user-nav">
-			<a href="#login">Log In</a>/<a href="#signup" class="dark">Sign Up</a>
+            {% if request.user.is_authenticated %}
+                <p>
+                    Hello, {{ user.username }}
+                </p>
+                <a href="{% url 'logout' %}"> Logout </a>
+            {% else %}
+                <a href="{% url 'login' %}">Log In</a>/<a href="{% url 'register' %}" class="dark">Sign Up</a>
+            {% endif %}
 		</div>
 
 		<div class="col-xs-12 slogan">
@@ -67,7 +74,7 @@
 	<section class="row dark">
 
 	</section>
-	
+
 	<section class="row active">
 
 	</section>
@@ -159,3 +166,4 @@
 </script>
 </body>
 </html>
+>>>>>>> 11835c6a0e22d3ac724d3c082e8144b9f1358d73
