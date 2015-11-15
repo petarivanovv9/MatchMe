@@ -33,3 +33,6 @@ class Event(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.name, self.place.name)
+
+    def get_absolute_url(self):
+        return "/event/%i" % self.pk

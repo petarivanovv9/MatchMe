@@ -2,6 +2,20 @@
     <p>
         Hello, {{ user.username }}
     </p>
+
+
+    <p> All events </p>
+    <ul>
+    {% for event in events %}
+        <li><a href="/event/{{ event.id }}">{{ event.name }} - {{ event.id }}</a></li>
+        <br />
+    {% endfor %}
+    </ul>
+
+    <br />
+    <br />
+
+
     <a href="{% url 'logout' %}"> Logout </a>
 
 {% else %}

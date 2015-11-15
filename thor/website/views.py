@@ -5,11 +5,15 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.decorators import login_required
 
+from .models import Event
+
 # Create your views here.
 
 
 def index(request):
-    return render(request, "index.html")
+    events = Event.objects.all()
+
+    return render(request, "index.html", locals())
 
 
 def user_login(request):
@@ -72,3 +76,10 @@ def user_register(request):
 
         else:
             return render(request, "register.html")
+
+
+@login_required
+def view_event(request, event_id):
+    current_event = Event.objects.get(pk=event_id)
+
+    return render(request, "event.html", locals())
