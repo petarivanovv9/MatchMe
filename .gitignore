@@ -61,3 +61,6 @@ app_env/
 
 # db file
 db.sqlite3
+
+# MAC files
+.DS_Store

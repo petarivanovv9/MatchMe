@@ -1,0 +1,42 @@
+section.row {
+	min-height: 100vh;
+}
+
+section.active {
+	background-color: #3498db;
+}
+
+section.dark {
+	background-color: #222;
+	color: #fff;
+}
+
+/* black & blue */
+section h2.section-title {
+	position: relative;
+	color: #3498db;
+	font-size: 9em;
+	margin: 0;
+	-webkit-transform: translate(0, -52%);
+    transform: translate(0, -52%);
+}
+
+section h2.section-title.right {
+	text-align: right;
+}
+
+section h2.section-title span {
+    height: 52%;
+    position: absolute;
+    color: #222;
+    overflow: hidden;
+}
+
+/* white & black */
+section.dark h2.section-title, section h2.section-title.dark{
+	color: #3498db;
+}
+
+section.dark h2.section-title span, section h2.section-title.dark span {
+	color: #fff;
+}
