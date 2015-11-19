@@ -1,0 +1,9 @@
+{
+  "token": "CAACEdEose0cBAD6BHET9TT1CMYaPh1GakmpphVDLCavAXTJjhaOpaGxdaLgg9lgmUwZAgXprnWAZCRwk5YSBOgqsTH3yAHyZA48ZC5De8HzJrZBxg9C0l991KaRJ7aNnGIZAJAURgB2wTZBhZCeScZBcMf29QOF8zmJWkSbOZBpW0REzxdyghUPFIqgPigx2vEUdHQZCar4ZCv3JlQZDZD",
+  "base_url": "https://graph.facebook.com/v2.5/search?",
+  "start_urls": [
+    "q=Sofia&type=event",
+    "q=Sofia, Bulgaria&type=event",
+    "q=софия&type=event"
+  ]
+}
