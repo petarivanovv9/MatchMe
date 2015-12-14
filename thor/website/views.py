@@ -73,6 +73,7 @@ def user_register(request):
                 return redirect("register")
 
             user = User.objects.create_user(username, email, password)
+            UserProfile.objects.create(user=user)
 
             if user is not None:
                 user = authenticate(username=username, password=password)
