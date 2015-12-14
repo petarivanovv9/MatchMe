@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Event, EventUser
+from .models import UserProfile
 
 # Create your views here.
 
@@ -101,3 +102,18 @@ def attend_event(request, event_id):
     EventUser(event_id=event_id, user_id=request.user.id).save()
 
     return redirect("index")
+
+
+@login_required
+def view_profile(request):
+    user_id = request.user.id
+
+    user_profile = UserProfile.objects.get(user_id=user_id)
+
+    user_profile_data = {}
+    user_profile_data["first_name"] = user_profile.first_name
+    user_profile_data["last_name"] = user_profile.last_name
+    user_profile_data["city"] = user_profile.city
+    user_profile_data["age"] = user_profile.age
+
+    return render(request, "profile.html", locals())
