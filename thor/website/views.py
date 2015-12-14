@@ -118,3 +118,8 @@ def view_profile(request):
     user_profile_data["age"] = user_profile.age
 
     return render(request, "profile.html", locals())
+
+
+@login_required
+def edit_profile(request):
+    return render(request, "edit_profile.html", locals())

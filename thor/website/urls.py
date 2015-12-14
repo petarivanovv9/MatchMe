@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from .views import index, user_register, user_login, user_logout
 from .views import view_event, attend_event
-from .views import view_profile
+from .views import view_profile, edit_profile
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
 
 
     url(r'^profile/$', view_profile, name="profile"),
+    url(r'^profile/edit/$', edit_profile, name="edit"),
 ]
