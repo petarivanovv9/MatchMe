@@ -14,6 +14,19 @@ class City(models.Model):
         return "{}".format(self.name)
 
 
+class UserProfile(models.Model):
+    user = models.ForeignKey(User)
+
+    city = models.ForeignKey(City, null=True)
+
+    first_name = models.CharField(
+        max_length=20, blank=True, default="", null=True)
+    last_name = models.CharField(
+        max_length=20, blank=True, default="", null=True)
+
+    age = models.IntegerField(blank=True, default=0, null=True)
+
+
 class Place(models.Model):
     city = models.ForeignKey(City, null=True)
     name = models.CharField(max_length=100, blank=True, default="", null=True)
@@ -46,3 +59,5 @@ class EventUser(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.event, self.user)
+
+
