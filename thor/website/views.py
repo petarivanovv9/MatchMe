@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Event, EventUser
-from .models import UserProfile
+from .models import UserProfile, City
 
 # Create your views here.
 
@@ -75,6 +75,13 @@ def user_register(request):
             user = User.objects.create_user(username, email, password)
             UserProfile.objects.create(user=user)
 
+            events = Event.objects.all()
+
+            if events is not None:
+                for event in events:
+                    EventUser.objects.create(
+                        user_id=user.id, event_id=event.id)
+
             if user is not None:
                 user = authenticate(username=username, password=password)
                 login(request, user)
@@ -90,17 +97,47 @@ def user_register(request):
 def view_event(request, event_id):
     current_event = Event.objects.get(pk=event_id)
 
-    bam = EventUser.objects.filter(event_id=event_id, user_id=request.user.id)
-    has_attended = True
-    if not bam:
-        has_attended = False
+    event_user = EventUser.objects.filter(
+        event_id=event_id, user_id=request.user.id)
+
+    event_user_status = event_user[0].status
+    print(event_user_status)
+
+    # has_attended = True
+    # if not event_user:
+    #     has_attended = False
 
     return render(request, "event.html", locals())
+
+# 0 - nothing / not interested in the event
+# 1 - attending the event
+# 2 - interested in the event
+# 3 - declining the event
 
 
 @login_required
 def attend_event(request, event_id):
-    EventUser(event_id=event_id, user_id=request.user.id).save()
+    event = EventUser.objects.get(event_id=event_id, user_id=request.user.id)
+    event.status = 1
+    event.save()
+
+    return redirect("index")
+
+
+@login_required
+def interested_event(request, event_id):
+    event = EventUser.objects.get(event_id=event_id, user_id=request.user.id)
+    event.status = 2
+    event.save()
+
+    return redirect("index")
+
+
+@login_required
+def decline_event(request, event_id):
+    event = EventUser.objects.get(event_id=event_id, user_id=request.user.id)
+    event.status = 3
+    event.save()
 
     return redirect("index")
 
@@ -122,4 +159,29 @@ def view_profile(request):
 
 @login_required
 def edit_profile(request):
+
+    if request.method == "POST":
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+
+        print(first_name)
+
+        age = request.POST.get("age")
+
+        city_name = request.POST.get("city")
+        city = City.objects.get(name=city_name)
+
+        user_id = request.user.id
+        user_profile = UserProfile.objects.get(user_id=user_id)
+
+        user_profile.first_name = first_name
+        user_profile.last_name = last_name
+        user_profile.age = age
+        user_profile.city = city
+        user_profile.save()
+
+        return redirect(view_profile)
+    else:
+        cities = City.objects.all()
+
     return render(request, "edit_profile.html", locals())

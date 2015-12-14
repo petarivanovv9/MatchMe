@@ -1,1 +1,42 @@
 <h1> Edit profile page </h1>
+
+<form method="POST" action="{% url 'edit' %}">
+    {% csrf_token %}
+
+    <br />
+
+    <div>
+        <label> FirstName: </label>
+        <input type="text" name="first_name" />
+    </div>
+
+    <br />
+
+    <div>
+        <label> LastName: </label>
+        <input type="text" name="last_name" />
+    </div>
+
+    <br />
+
+    <div>
+        <label> Age: </label>
+        <input type="number" name="age" />
+    </div>
+
+    <br />
+
+    <label> City: </label>
+    <input list="cities" name="city">
+
+    <datalist id="cities">
+     {% for city in cities %}
+        <option value="{{ city.name }}"> </option>
+    {% endfor %}
+    </datalist>
+
+    <br />
+    <br />
+
+    <input type="submit" value="Update profile" />
+</form>
