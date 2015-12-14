@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Event, EventUser
-from .models import UserProfile
+from .models import UserProfile, City
 
 # Create your views here.
 
@@ -122,4 +122,29 @@ def view_profile(request):
 
 @login_required
 def edit_profile(request):
+
+    if request.method == "POST":
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+
+        print(first_name)
+
+        age = request.POST.get("age")
+
+        city_name = request.POST.get("city")
+        city = City.objects.get(name=city_name)
+
+        user_id = request.user.id
+        user_profile = UserProfile.objects.get(user_id=user_id)
+
+        user_profile.first_name = first_name
+        user_profile.last_name = last_name
+        user_profile.age = age
+        user_profile.city = city
+        user_profile.save()
+
+        return redirect(view_profile)
+    else:
+        cities = City.objects.all()
+
     return render(request, "edit_profile.html", locals())
