@@ -1,0 +1,22 @@
+<h1> User Profile page </h1>
+
+<a href="{% url 'edit' %}"> Edit profile </a>
+
+<br />
+<br />
+
+<p>
+   First name: {{ user_profile_data.first_name }}
+</p>
+
+<p>
+    Last name: {{ user_profile_data.last_name }}
+</p>
+
+<p>
+    City: {{ user_profile_data.city }}
+</p>
+
+<p>
+    Age: {{ user_profile_data.age }}
+</p>

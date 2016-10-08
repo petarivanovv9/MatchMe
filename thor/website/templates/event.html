@@ -1,0 +1,13 @@
+<h1> Event page </h1>
+
+{{ current_event.name }}
+
+<br />
+<br />
+
+{% if has_attended == False %}
+    <br />
+
+    <a href="/event/attend/{{ current_event.id }}">Attend the event</a>
+{% endif %}
+
