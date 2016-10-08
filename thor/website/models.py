@@ -56,8 +56,11 @@ class Event(models.Model):
 class EventUser(models.Model):
     event = models.ForeignKey(Event)
     user = models.ForeignKey(User)
+    # 0 - nothing / not interested in the event
+    # 1 - attending the event
+    # 2 - interested in the event
+    # 3 - declining the event
+    status = models.IntegerField(blank=True, default=0, null=True)
 
     def __str__(self):
         return "{} - {}".format(self.event, self.user)
-
-

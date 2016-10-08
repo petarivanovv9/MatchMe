@@ -5,9 +5,37 @@
 <br />
 <br />
 
-{% if has_attended == False %}
+<!-- default / user is not interested in the event / declined the event -->
+{% if event_user_status == 0 or event_user_status == 3 %}
+    <br />
+
+    <a href="/event/attend/{{ current_event.id }}">Attend the event</a>
+    <br />
+    <br />
+
+    <a href="/event/interested/{{ current_event.id }}">Interested in the event</a>
+{% endif %}
+
+<!-- the user is attending the event -->
+{% if event_user_status == 1 %}
+    <br />
+
+    <a href="/event/interested/{{ current_event.id }}">Interested in the event</a>
+
+    <br />
+    <br />
+
+    <a href="/event/decline/{{ current_event.id }}">Decline the event</a>
+{% endif %}
+
+<!-- the user is interested in the event -->
+{% if event_user_status == 2 %}
+    <br />
+
+    <a href="/event/decline/{{ current_event.id }}">Not interested in the event</a>
+
+    <br />
     <br />
 
     <a href="/event/attend/{{ current_event.id }}">Attend the event</a>
 {% endif %}
-

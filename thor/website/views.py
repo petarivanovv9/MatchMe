@@ -75,6 +75,13 @@ def user_register(request):
             user = User.objects.create_user(username, email, password)
             UserProfile.objects.create(user=user)
 
+            events = Event.objects.all()
+
+            if events is not None:
+                for event in events:
+                    EventUser.objects.create(
+                        user_id=user.id, event_id=event.id)
+
             if user is not None:
                 user = authenticate(username=username, password=password)
                 login(request, user)
@@ -90,17 +97,47 @@ def user_register(request):
 def view_event(request, event_id):
     current_event = Event.objects.get(pk=event_id)
 
-    bam = EventUser.objects.filter(event_id=event_id, user_id=request.user.id)
-    has_attended = True
-    if not bam:
-        has_attended = False
+    event_user = EventUser.objects.filter(
+        event_id=event_id, user_id=request.user.id)
+
+    event_user_status = event_user[0].status
+    print(event_user_status)
+
+    # has_attended = True
+    # if not event_user:
+    #     has_attended = False
 
     return render(request, "event.html", locals())
+
+# 0 - nothing / not interested in the event
+# 1 - attending the event
+# 2 - interested in the event
+# 3 - declining the event
 
 
 @login_required
 def attend_event(request, event_id):
-    EventUser(event_id=event_id, user_id=request.user.id).save()
+    event = EventUser.objects.get(event_id=event_id, user_id=request.user.id)
+    event.status = 1
+    event.save()
+
+    return redirect("index")
+
+
+@login_required
+def interested_event(request, event_id):
+    event = EventUser.objects.get(event_id=event_id, user_id=request.user.id)
+    event.status = 2
+    event.save()
+
+    return redirect("index")
+
+
+@login_required
+def decline_event(request, event_id):
+    event = EventUser.objects.get(event_id=event_id, user_id=request.user.id)
+    event.status = 3
+    event.save()
 
     return redirect("index")
 
